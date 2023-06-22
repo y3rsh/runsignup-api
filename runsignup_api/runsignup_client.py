@@ -1,4 +1,4 @@
-# 0. Import
+# Runsignup API runnable example client using Gracy - https://github.com/guilatrova/gracy
 import asyncio
 import typing as t
 from os import environ
@@ -18,8 +18,8 @@ class RunSignupApiEndpoint(BaseEndpoint):
 
 # 2. Define your Graceful API
 class RunsignupAPI(Gracy[str]):
-    class Config:  # type: ignore
-        # TrailHawks clib ID = 2198
+    class Config:
+        # TrailHawks club ID = 2198
         BASE_URL = "https://runsignup.com/rest/club/2198"
         SETTINGS = GracyConfig(
             log_request=LogEvent(LogLevel.DEBUG),
@@ -45,7 +45,7 @@ rsu = RunsignupAPI()
 async def main():
     try:
         members = await rsu.get_members()
-        print(f"Printing the 0 index member of {len(members['club_members'])}.")
+        print(f"Printing the 0 index member of {len(members['club_members'])} total currently active members.")
         print(members["club_members"][0])
 
     finally:
